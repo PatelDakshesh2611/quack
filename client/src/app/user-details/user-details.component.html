@@ -1,0 +1,94 @@
+<div
+        id="default-modal"
+        tabindex="-1"
+        aria-hidden="true"
+        class="fixed inset-0 z-50 flex items-center justify-center overflow-hidden bg-black/60"
+    >
+        <div class="relative p-4 max-w-sm w-full bg-[var(--modal)] rounded-lg shadow">
+            <!-- Modal header -->
+            <div
+                class="flex items-center justify-between p-4 border-b dark:border-gray-600"
+            >
+                <h3 class="text-lg font-semibold text-gray-900 dark:text-white">
+                    Fill the information
+                </h3>
+                <button
+                    type="button"
+                    class="text-gray-400 hover:bg-gray-200 rounded-lg text-sm w-8 h-8 inline-flex items-center justify-center"
+                    (click)="closeUserDetailsModal()"
+                >
+                    <svg
+                        class="w-3 h-3"
+                        aria-hidden="true"
+                        xmlns="http://www.w3.org/2000/svg"
+                        fill="none"
+                        viewBox="0 0 14 14"
+                    >
+                        <path
+                            stroke="currentColor"
+                            stroke-linecap="round"
+                            stroke-linejoin="round"
+                            stroke-width="2"
+                            d="m1 1 6 6m0 0 6 6M7 7l6-6M7 7l-6 6"
+                        />
+                    </svg>
+                    <span class="sr-only">Close modal</span>
+                </button>
+            </div>
+            <!-- Modal body -->
+            <form [formGroup]="userDetailsForm" (ngSubmit)="onSubmit()" class="space-y-4">
+              <div class="p-4">
+                <div class="mb-2">
+                  <label for="name" class="block mb-1 text-sm font-medium text-gray-900">Name</label>
+                  <input type="text" id="name" formControlName="name" class="bg-gray-500 text-gray-900 text-sm rounded-lg w-full p-2.5 outline-none" placeholder="Enter your name" required>
+                  <div *ngIf="name?.invalid && (name?.touched || name?.dirty)" class="text-red-500 text-sm mt-1">
+                    Name is required
+                  </div>
+                </div>
+                <div class="mb-2">
+                  <label class="block mb-1 text-sm font-medium text-gray-900">Gender</label>
+                  <div class="flex items-center">
+                    <input type="radio" id="male" formControlName="gender" value="male" />
+                    <span class="custom-radio"></span>
+                    <label for="male" class="ml-2 text-sm font-medium text-gray-900 cursor-pointer">Male</label>
+                  </div>
+                  <div class="flex items-center mt-2">
+                    <input type="radio" id="female" formControlName="gender" value="female" />
+                    <span class="custom-radio"></span>
+                    <label for="female" class="ml-2 text-sm font-medium text-gray-900 cursor-pointer">Female</label>
+                  </div>
+                  <div class="flex items-center mt-2">
+                    <input type="radio" id="other" formControlName="gender" value="other" />
+                    <span class="custom-radio"></span>
+                    <label for="other" class="ml-2 text-sm font-medium text-gray-900 cursor-pointer">Other</label>
+                  </div>
+                  <div *ngIf="gender?.invalid && (gender?.touched || gender?.dirty)" class="text-red-500 text-sm mt-1">
+                    Gender is required
+                  </div>
+                </div>
+                <div>
+                  <label for="preferences" class="block mb-1 text-sm font-medium text-gray-900">Preferences</label>
+                  <select id="preferences" formControlName="preferences" class="bg-gray-500 text-white text-sm rounded-lg w-full p-2.5 outline-none">
+                    <option value="" disabled selected>Select preference</option>
+                    <option value="male">Male</option>
+                    <option value="female">Female</option>
+                    <option value="other">Other</option>
+                  </select>
+                  <div *ngIf="preferences?.invalid && (preferences?.touched || preferences?.dirty)" class="text-red-500 text-sm mt-1">
+                    Preferences is required
+                  </div>
+                </div>
+              </div>
+              <!-- Modal footer -->
+              <div class="flex justify-end p-4 border-t dark:border-gray-600">
+                <button type="submit" class="text-white bg-[var(--purple)] hover:bg-[var(--purple-dark)] rounded-lg text-sm px-4 py-2.5">
+                  Submit
+                </button>
+                <button type="button" (click)="closeUserDetailsModal()" class="ml-3 text-sm font-medium text-[var(--purple-light)] bg-transparent border border-[var(--purple-light)] rounded-lg px-4 py-2.5 hover:text-[var(--purple)] hover:border-[var(--purple)]">
+                  Cancel
+                </button>
+              </div>
+            </form>
+
+        </div>
+    </div>

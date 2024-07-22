@@ -1,0 +1,20 @@
+<div class="container items-center w-10/12 grid-cols-2 mx-auto overflow-x-hidden lg:grid md:py-14 lg:py-24 xl:py-14 lg:mt-4 xl:mt-5" data-aos="fade-right" data-aos-duration="800">
+  <div class="pr-2 md:mb-14 py-14 md:py-0">
+    <h1 class="text-3xl font-semibold text-[var(--purple)] xl:text-7xl lg:text-9xl"><span class="block w-full">Live Chat...</span></h1>
+    <p class="py-4 text-lg text-white/60 2xl:py-8 md:py-6 2xl:pr-5">
+      Experience the thrill of meeting new people instantly with ChatRando. Our platform offers real-time random chat features, letting you connect with others worldwide in just a click. Set your gender preferences for free and enjoy a seamless chatting experience like never before. Join ChatRando today and start your adventure!
+    </p>
+    <div class="mt-4">
+      <button (click)="openUserDetailsModal()" class="px-5 py-3 text-lg tracking-wider text-white/80 bg-[var(--purple)] rounded-lg md:px-8 hover:bg-[var(--purple-dark)] group font-bold"><span>Chat now!</span></button>
+    </div>
+  </div>
+
+  <div class="pb-10 overflow-hidden md:p-10 lg:p-0 sm:pb-0 hover:scale-105 transition-all duration-300 ease-in-out">
+    <img id="heroImg1" class="lg:w-full sm:mx-auto sm:w-4/6 sm:pb-12 lg:pb-0" src="assets/undraw_chatting_re_j55r.svg" alt="Awesome hero page image" width="500" height="488"/>
+  </div>
+
+  <!-- <app-user-details *ngIf="isUserDetailsModalOpen" (close)="closeUserDetailsModal()"></app-user-details> -->
+  <div id="default-modal" tabindex="-1" aria-hidden="true" [ngClass]="{'hidden': !isUserDetailsModalOpen, 'flex': isUserDetailsModalOpen}" class="overflow-y-auto overflow-x-hidden fixed top-0 right-0 left-0 z-50 justify-center items-center w-full md:inset-0 h-[calc(100%-1rem)] max-h-full">
+   <app-user-details (close)="handleCloseUserDetailsModal($event)"></app-user-details>
+  </div>
+</div>
