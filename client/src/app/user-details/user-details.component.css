@@ -1,0 +1,93 @@
+.modal-overlay {
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  background: rgba(0, 0, 0, 0.5);
+  visibility: hidden;
+  opacity: 0;
+  transition: visibility 0s, opacity 0.3s;
+}
+
+.modal-overlay--visible {
+  visibility: visible;
+  opacity: 1;
+}
+
+.modal {
+  visibility: hidden;
+  opacity: 0;
+  transition: visibility 0s, opacity 0.3s;
+}
+
+.modal--visible {
+  visibility: visible;
+  opacity: 1;
+}
+
+input[type="radio"] {
+  position: absolute;
+  opacity: 0;
+  width: 0;
+  height: 0;
+}
+
+/* Custom radio button */
+.custom-radio {
+  display: inline-block;
+  width: 20px;
+  height: 20px;
+  background-color: #fff;
+  border: 2px solid #ccc;
+  border-radius: 50%;
+  position: relative;
+  cursor: pointer;
+}
+
+/* Inner circle */
+.custom-radio::after {
+  content: '';
+  width: 12px;
+  height: 12px;
+  background-color: #7c3aed; /* Purple color */
+  border-radius: 50%;
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+  opacity: 0;
+  transition: opacity 0.2s;
+}
+
+/* Show inner circle when checked */
+input[type="radio"]:checked + .custom-radio::after {
+  opacity: 1;
+}
+
+/* Label for radio button */
+label {
+  margin-right: 15px;
+  display: flex;
+  align-items: center;
+  color: white;
+}
+
+/* Additional styles for the modal */
+#default-modal input[type=text],
+#default-modal label {
+  color: white;
+}
+
+#default-modal ::placeholder,
+#default-modal select {
+  color: var(--placeholder);
+}
+
+input[type=text], label{
+  color: white;
+}
+
+::placeholder, select{
+  color: var(--placeholder);
+}
