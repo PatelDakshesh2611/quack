@@ -26,10 +26,10 @@ const handleSocket = (io) => {
       
       if (users_obj[myid]) {
         searching_user[myid] = userdata.userdata;
-        console.log('User added to searching_user:', searching_user);
+        // console.log('User added to searching_user:', searching_user);
 
         // Check if there are more than 2 users searching
-        if (Object.keys(searching_user).length > 2) {
+        if (Object.keys(searching_user).length > 1) {
           let found = false;
 
           // Iterate through searching_user to find another user with a different ID
@@ -39,6 +39,7 @@ const handleSocket = (io) => {
               users_obj[myid].connected_user = id;
               users_obj[id].connected_user = myid;
 
+              
               // Emit event to notify both users
               socket.emit("connectWithUser", { user: users_obj[id] });
               io.to(id).emit("connectWithUser", { user: users_obj[myid] });
@@ -48,13 +49,25 @@ const handleSocket = (io) => {
               delete searching_user[id];
               
               found = true;              
-              console.log(`Connected user ${myid} with user ${id}`);            
+              console.log(`Connected user ${myid} with user ${id}`);    
+              console.log(users_obj);        
             }
           });
         }
       }
     });
-
+    
+    socket.on('disconnectuser',()=>{
+        const connectedUserId = users_obj[socket.id]?.connected_user;  
+        if(users_obj[socket.id]?.connected_user){
+            users_obj[socket.id].connected_user=null
+        }      
+        if (connectedUserId) {
+          io.to(connectedUserId).emit("userDisconnected", { userId: socket.id });
+          // Also clear the connected_user field of the connected user
+          users_obj[connectedUserId].connected_user = null;
+        }          
+    })
     socket.on("sendMessage", (messageData) => {
       const connectedUserId = users_obj[socket.id]?.connected_user;
       if (connectedUserId) {
@@ -76,7 +89,7 @@ const handleSocket = (io) => {
       // Remove user details from the object
       delete users_obj[socket.id];
       delete searching_user[socket.id];
-      console.log(users_obj);
+    //   console.log(users_obj);
     });
   });
 };
