@@ -1,0 +1,55 @@
+<div
+  class="container mx-auto py-4 h-full flex flex-col items-center justify-center"
+>
+  <div class="flex flex-col h-full w-full">
+    <div
+      class="chat-window flex-grow overflow-y-scroll p-4 bg-[#202020] rounded w-full"
+    >
+      <div *ngFor="let message of messages" class="mb-4">
+        <div
+          [ngClass]="{
+            'text-right': message.sender === 'me',
+            'text-left': message.sender !== 'me'
+          }"
+        >
+          <div
+            class="inline-block p-2 rounded-lg font-semibold"
+            [ngClass]="{
+              'bg-[var(--purple)] text-white': message.sender === 'me',
+              'bg-gray-300 text-black': message.sender !== 'me'
+            }"
+          >
+            {{ message.text }}
+          </div>
+          <div class="text-gray-500 text-sm py-3">
+            {{ message.timestamp | date : "hh:mm" }}
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <div class="flex items-start mt-4 w-full">
+      <button
+        (click)="refresh()"
+        class="mr-2 px-4 py-2 bg-gray-500 text-white rounded hover:bg-gray-600"
+      >
+        Skip
+      </button>
+      <!-- <input type="text" [(ngModel)]="newMessage" placeholder="Type your message..." class="flex-grow px-4 py-2 rounded mr-2 outline-none" /> -->
+      <!-- <textarea [(ngModel)]="newMessage" placeholder="Type your message..." class="flex-grow px-4 py-2 rounded mr-2 outline-none" rows="1"></textarea> -->
+      <textarea
+        [(ngModel)]="newMessage"
+        placeholder="Type your message..."
+        class="flex-grow px-4 py-2 rounded mr-2 outline-none resize-none"
+        rows="1"
+        (input)="adjustTextareaHeight($event)"
+      ></textarea>
+      <button
+        (click)="sendMessage()"
+        class="px-12 py-2 bg-[var(--purple)] text-white rounded hover:bg-[var(--purple-dark)]"
+      >
+        Send
+      </button>
+    </div>
+  </div>
+</div>

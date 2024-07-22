@@ -2,6 +2,7 @@ import { CommonModule } from '@angular/common';
 import { Component, EventEmitter, OnInit, Output } from '@angular/core';
 import { ReactiveFormsModule } from '@angular/forms';
 import { FormBuilder, FormGroup, Validators } from '@angular/forms';
+import { Router } from '@angular/router';
 
 @Component({
   selector: 'app-user-details',
@@ -14,7 +15,7 @@ export class UserDetailsComponent  implements OnInit{
 
   userDetailsForm!: FormGroup;
 
-  constructor(private fb: FormBuilder) { }
+  constructor(private fb: FormBuilder, private router: Router) { }
 
   ngOnInit(): void {
     this.userDetailsForm = this.fb.group({
@@ -33,8 +34,8 @@ export class UserDetailsComponent  implements OnInit{
   onSubmit(): void {
     if (this.userDetailsForm.valid) {
       console.log(this.userDetailsForm.value);
-      // Handle form submission
       this.closeUserDetailsModal();
+      this.router.navigate(['/chat']);
     } else {
       this.userDetailsForm.markAllAsTouched(); // Mark all fields as touched to trigger validation messages
     }

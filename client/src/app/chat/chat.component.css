@@ -1,0 +1,45 @@
+.chat-window {
+  height: 80%;
+  background-color: var(--chat-active);
+  border-radius: .5rem;
+}
+
+input{
+  background-color: var(--chat-active);
+  color: white;
+  border-radius: .5rem;
+}
+
+textarea{
+  background-color: var(--chat-active);
+  color: white;
+  border-radius: .5rem;
+  max-height: calc(1.5em * 4);  
+}
+
+button{
+  border-radius: .5rem;
+}
+
+::-webkit-scrollbar {
+  width: 12px;
+}
+
+::-webkit-scrollbar-track {
+  background: var(--chat-active);
+  border-radius: 10px;
+}
+
+::-webkit-scrollbar-thumb {
+  background-color: var(--purple);
+  border-radius: 10px;
+  border: 3px solid #1e1e1e;
+}
+
+::-webkit-scrollbar-thumb:hover {
+  background-color: var(--purple-dark);
+}
+
+::-webkit-scrollbar-thumb:active {
+  background-color: var(--purple-light);
+}
